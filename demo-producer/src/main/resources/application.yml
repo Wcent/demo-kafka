@@ -1,0 +1,34 @@
+server:
+  port: 8080
+
+logging:
+  level:
+    root: info
+    cn.cent.demo.producer: debug
+    cn.cent.demo.service: debug
+
+spring:
+  kafka:
+    bootstrap-servers:
+      - localhost:9092
+      - localhost:9093
+      - localhost:9094
+      - localhost:9095
+
+    producer:
+#      retries: 0
+      retries: 1
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+
+    consumer:
+      group-id: mygroup
+      enable-auto-commit: false
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        # 自定义消息类对象所在包配置为序列化/反序列化可信任包
+        spring.json.trusted.packages: cn.cent.demo.producer.dto
+
+    listener:
+      ack-mode: manual

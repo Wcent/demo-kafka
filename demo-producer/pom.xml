@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<!-- 子pom此处定义继承父pom -->
+	<parent>
+		<groupId>cn.cent</groupId>
+		<artifactId>demo-kafka</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+	<artifactId>demo-producer</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>demo-producer</name>
+	<description>Demo project for Spring Boot Kafka Producer</description>
+
+	<properties>
+		<java.version>1.8</java.version>
+	</properties>
+
+	<!-- 子pom此处引用自己的依赖，版本可在父pom的dependencyManagement声明统一管理，或是子pom指定版本 -->
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-quartz</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.kafka</groupId>
+			<artifactId>spring-kafka</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.kafka</groupId>
+			<artifactId>spring-kafka-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+			<!-- 子pom无指定版本,则必须在父pom denpendencyManagement声明版本，子pom有指定版本则是引用自定义版本 -->
+			<!-- <version>1.2.66</version>-->
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>

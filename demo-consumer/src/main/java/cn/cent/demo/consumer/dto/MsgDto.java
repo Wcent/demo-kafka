@@ -26,7 +26,8 @@ public class MsgDto {
     private String payload;
 
     /**
-     * 序列化/反序列化注解可解决Jackson报错：cannot deserialize from Object value (no delegate- or property-based Creator)
+     * 序列化/反序列化注解指定日期时间格式
+     * 可解决Jackson报错：cannot deserialize from Object value (no delegate- or property-based Creator)
      */
     @JsonSerialize(using = LocalDateTimeSerializer.class)
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)

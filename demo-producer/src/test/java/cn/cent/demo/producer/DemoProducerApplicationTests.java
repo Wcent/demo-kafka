@@ -88,6 +88,8 @@ class DemoProducerApplicationTests {
 //					new LocalTimeDeserializer(DateTimeFormatter.ofPattern("HH:mm:ss")));
 //			objectMapper.registerModule(javaTimeModule);
 
+			// 另一种方式通过MsgDto类的日期时间属性加注解指定Jackson序列号/反序列化格式
+			// 可解决报错：cannot deserialize from Object value (no delegate- or property-based Creator)
 			String jsonString = objectMapper.writeValueAsString(new MsgDto("json string"));
 			log.debug("序列化成功：{}", jsonString);
 
@@ -105,12 +107,12 @@ class DemoProducerApplicationTests {
 		Consumer<String, MsgDto> consumer = initConsumer(GROUP_TEST, TOPIC_NAME_TEST);
 		String payload = "Hello World";
 
-		Future<RecordMetadata> future = producer.send(new ProducerRecord<String, MsgDto>(TOPIC_NAME_TEST, new MsgDto(payload)));
+		Future<RecordMetadata> future = producer.send(new ProducerRecord<>(TOPIC_NAME_TEST, new MsgDto(payload)));
 		try {
 			RecordMetadata recordMetadata = future.get(1, TimeUnit.MINUTES);
 			log.debug("发布消息成功：{}", recordMetadata);
 		} catch (InterruptedException | ExecutionException | TimeoutException e) {
-			log.debug("获取发布消息结果超时", e);
+			log.error("获取发布结果异常	", e);
 		}
 
 		ConsumerRecord<String, MsgDto> consumerRecord = KafkaTestUtils.getSingleRecord(consumer, TOPIC_NAME_TEST);

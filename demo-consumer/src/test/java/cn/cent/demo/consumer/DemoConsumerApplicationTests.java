@@ -23,6 +23,8 @@ import org.springframework.kafka.support.serializer.JsonSerializer;
 import org.springframework.kafka.test.EmbeddedKafkaBroker;
 import org.springframework.kafka.test.context.EmbeddedKafka;
 import org.springframework.kafka.test.utils.KafkaTestUtils;
+import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.context.TestPropertySource;
 
 import java.util.Collections;
 import java.util.Map;
@@ -33,9 +35,10 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
 @SpringBootTest
-@EmbeddedKafka(count = 2, ports = {9092, 9093}, partitions = 4, topics = {"MyTopic", "TopicNameTest"})
-//@EmbeddedKafka(count = 1, ports = {9092}, partitions = 1, topics = {"TopicName"},
-//		bootstrapServersProperty = "spring.kafka.bootstrap-servers")
+//@EmbeddedKafka(count = 2, ports = {9092, 9093}, partitions = 4, topics = {"MyTopic", "TopicNameTest"})
+@EmbeddedKafka(count = 2, ports = {9092, 9093}, partitions = 2, topics = {"MyTopic", "TopicNameTest"},
+		bootstrapServersProperty = "spring.kafka.bootstrap-servers")
+//@TestPropertySource(properties = {"spring.kafka.bootstrap-servers=${spring.embedded.kafka.brokers}"})
 @Slf4j
 class DemoConsumerApplicationTests {
 

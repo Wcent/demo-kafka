@@ -2,6 +2,7 @@ package cn.cent.demo.producer.service;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
  * @version 1.0 2020/3/21
  */
 @Service
+@EnableScheduling
 @Slf4j
 public class SchedulerService {
 
